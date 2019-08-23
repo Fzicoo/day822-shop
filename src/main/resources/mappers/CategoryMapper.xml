@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.shop.mapper.CategoryMapper">
+    <resultMap id="customResult" type="com.vip.shop.domain.vo.CateGoryVo">
+        <id property="cateId" column="cate_id"/>
+        <result property="cateName" column="cate_name"/>
+        <collection property="subMenuList" resultMap="com.vip.shop.mapper.SubMenuMapper.Base_SubMenu_Vo">
+
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="customResult">
+        select *
+        from category c
+            left join sub_menu sm on c.cate_id = sm.cate_id
+            left join sub_menu1 sm1 on sm.sub_menu_id = sm1.sub_menu_id
+    </select>
+
+<!--    查询商品分类-->
+    <resultMap id="customResult_shop" type="com.vip.shop.domain.vo.CateGoryVo">
+        <id property="cateId" column="cate_id"/>
+        <result property="cateName" column="cate_name"/>
+        <collection property="shopList" resultMap="com.vip.shop.mapper.ShopMapper.Base_Shop_Vo">
+
+        </collection>
+    </resultMap>
+    <select id="findAllShop" resultMap="customResult_shop">
+        select *
+        from category c
+            left join shop s on c.cate_id = s.cate_id
+            left join shop_image si on s.shop_id = si.shop_id
+    </select>
+
+</mapper>

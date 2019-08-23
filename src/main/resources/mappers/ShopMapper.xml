@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.shop.mapper.ShopMapper">
+    <resultMap id="Base_Shop_ResultMap" type="com.vip.shop.domain.vo.ShopVo">
+        <id property="shopId" column="shop_id"/>
+        <result property="name" column="name"/>
+        <result property="subTitle" column="sub_title"/>
+        <result property="originalPrice" column="original_price"/>
+        <result property="promotePrice" column="promote_price"/>
+        <result property="stock" column="stock"/>
+        <result property="cateId" column="cate_id"/>
+    </resultMap>
+
+
+    <resultMap id="Base_Shop_Vo" type="com.vip.shop.domain.vo.ShopVo"
+               extends="Base_Shop_ResultMap">
+        <collection property="shopImgList" ofType="com.vip.shop.domain.entity.ShopImg">
+            <id property="shopImgId" column="shop_img_id"/>
+            <result property="shopId" column="shop_id"/>
+            <result property="type" column="type"/>
+        </collection>
+    </resultMap>
+
+</mapper>
